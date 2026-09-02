@@ -1,0 +1,25 @@
+{
+  "title": "LLM Security Gateway",
+  "panels": [
+    {
+      "title": "Requests / sec",
+      "type": "graph",
+      "targets": [{"expr": "rate(gateway_requests_total[1m])"}]
+    },
+    {
+      "title": "Blocked Inputs by Category",
+      "type": "graph",
+      "targets": [{"expr": "sum by (category) (rate(gateway_blocked_input_total[5m]))"}]
+    },
+    {
+      "title": "Output Redactions by Category",
+      "type": "graph",
+      "targets": [{"expr": "sum by (category) (rate(gateway_output_redactions_total[5m]))"}]
+    },
+    {
+      "title": "Request Latency (p95)",
+      "type": "graph",
+      "targets": [{"expr": "histogram_quantile(0.95, rate(gateway_request_latency_seconds_bucket[5m]))"}]
+    }
+  ]
+}
